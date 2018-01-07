@@ -1,6 +1,8 @@
 package com.demo.android.bmi_basic;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ public class Bmi extends AppCompatActivity {
         setContentView(R.layout.activity_bmi);
         findViews();
         setListenners();
+        func =new Publicfunc();
 
 
     }
@@ -43,19 +46,41 @@ public class Bmi extends AppCompatActivity {
     private View.OnClickListener listener =new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            double BMI=calcBMI();
-            showResult(BMI);
+            //try {
+                double BMI=calcBMI();
+                showResult(BMI);
+                openOptionDialog();
+           // } catch (Exception e) {
+          //      e.printStackTrace();
+          //  }
         }
     };
+
+    private void openOptionDialog(){
+//        new AlertDialog.Builder(Bmi.this).setTitle("關於 Android BMI")
+//                .setMessage("Android BMI Calc")
+//                .show();
+          new AlertDialog.Builder(Bmi.this).setTitle(R.string.dialog_title)
+          .setMessage(R.string.dialog_button_confirm)
+          .setPositiveButton(R.string.dialog_button_confirm,
+                  new DialogInterface.OnClickListener() {
+                      @Override
+                      public void onClick(DialogInterface dialog, int which) {
+                        System.out.println("你按下了");
+                      }
+                  })
+          .setNegativeButton(R.string.dialog_button_cancel,null)
+          .show();
+    }
 
     public double calcBMI(){
 
         double height=Double.parseDouble(field_height.getText()+"") /100;
         double weight=Double.parseDouble(field_weight.getText()+"");
-        double BMI=weight/(height*height);
-        return BMI;
+       // double BMI=weight/(height*height);
+       // return BMI;
 
-        //return func.calcBMI(height,weight);
+       return func.calcBMI(height,weight);
 
     }
     public void showResult(double BMI) {
