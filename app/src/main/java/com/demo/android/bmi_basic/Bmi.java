@@ -52,10 +52,10 @@ public class Bmi extends AppCompatActivity {
 
         double height=Double.parseDouble(field_height.getText()+"") /100;
         double weight=Double.parseDouble(field_weight.getText()+"");
-        //double BMI=weight/(height*height);
-        //return BMI;
+        double BMI=weight/(height*height);
+        return BMI;
 
-        return func.calcBMI(height,weight);
+        //return func.calcBMI(height,weight);
 
     }
     public void showResult(double BMI) {
